@@ -30,3 +30,14 @@
 
 - name: Ensure HAProxy is started and enabled on boot.
   service: name=haproxy state=started enabled=yes
+
+- name: Install certificates
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/ssl/private/{{ item | lower }}"
+    mode: 0640
+    group: "{{ haproxy_group }}"
+  with_items: "{{ haproxy_certificates }}"
+  notify:
+    - restart haproxy
+

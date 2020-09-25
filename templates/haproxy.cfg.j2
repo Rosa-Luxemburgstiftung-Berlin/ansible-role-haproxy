@@ -1,3 +1,8 @@
+{#
+vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2 smartindent nu ft=jinja
+#}
+# {{ ansible_managed }}
+
 global
   log /dev/log  local0
   log /dev/log  local1 notice
@@ -37,20 +42,30 @@ defaults
   errorfile 503 /etc/haproxy/errors/503.http
   errorfile 504 /etc/haproxy/errors/504.http
 {% endif %}
+{% for defaults_var in haproxy_defaults_vars %}
+  {{ defaults_var }}
+{% endfor %}
 
-frontend {{ haproxy_frontend_name }}
-    bind {{ haproxy_frontend_bind_address }}:{{ haproxy_frontend_port }}
-    mode {{ haproxy_frontend_mode }}
-    default_backend {{ haproxy_backend_name }}
-
-backend {{ haproxy_backend_name }}
-    mode {{ haproxy_backend_mode }}
-    balance {{ haproxy_backend_balance_method }}
-    option forwardfor
-{% if haproxy_backend_httpchk != '' %}
-    option httpchk {{ haproxy_backend_httpchk }}
+{% for frontend in haproxy_frontends %}
+frontend {{ frontend.name }}
+{% for fkey, fval in frontend.iteritems() %}
+{% if not fkey == 'name' %}
+  {{ fkey }} {{ fval }}
 {% endif %}
-    cookie SERVERID insert indirect
-{% for backend in haproxy_backend_servers %}
-    server {{ backend.name }} {{ backend.address }} cookie {{ backend.name }} check
+{% endfor %}
+{% endfor %}{# for frontend in haproxy_frontends #}
+
+{% for backend in haproxy_backends %}
+backend {{ backend.name }}
+{% for bkey, bval in backend.iteritems() %}
+{% if not bkey == 'name' %}
+{% if bkey == 'servers' %}
+{% for server in servers %}
+  server {{ server }}
+{% endfor %}
+{% else %}
+  {{ bkey }} {{ bval }}
+{% endif %}
+{% endif %}
+{% endfor %}
 {% endfor %}
