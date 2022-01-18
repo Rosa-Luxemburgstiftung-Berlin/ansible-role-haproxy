@@ -12,7 +12,7 @@ None.
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `defaults/main.yml`):
+Available variables are listed below, along with default values (see [defaults/main.yml](defaults/main.yml)):
 
     haproxy_socket: /var/lib/haproxy/stats
 
