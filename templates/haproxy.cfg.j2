@@ -48,6 +48,15 @@ frontend {{ haproxy_frontend_name }}
     bind {{ haproxy_frontend_bind_address }}:{{ haproxy_frontend_port }}
     mode {{ haproxy_frontend_mode }}
     default_backend {{ haproxy_backend_name }}
+{% for k, v in haproxy_frontend_options.items() | list %}
+{% if v is string %}
+  {{ k }} {{ v }}
+{% elif v is iterable %}
+{% for vl in v %}
+  {{ k }} {{ vl }}
+{% endfor %}
+{% endif %}{# end if v is string #}
+{% endfor %}{# end for k, v in haproxy_frontend_options.items() #}
 
 backend {{ haproxy_backend_name }}
     mode {{ haproxy_backend_mode }}
