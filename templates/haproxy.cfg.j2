@@ -16,15 +16,9 @@ global
 {% endfor %}
 
 defaults
-{% for k, v in haproxy_defaults.items() | list %}
-{% if v is string %}
-  {{ k }} {{ v }}
-{% elif v is iterable %}
-{% for vl in v %}
-  {{ k }} {{ vl }}
+{% for haproxy_default in haproxy_defaults %}
+  {{ haproxy_default }}
 {% endfor %}
-{% endif %}{# end if v is string #}
-{% endfor %}{# end for k, v in haproxy_defaults.items() #}
 {% if haproxy_version is version('1.4', '<=') %}
   contimeout {{ haproxy_connect_timeout }}
   clitimeout {{ haproxy_client_timeout }}
@@ -34,7 +28,7 @@ defaults
   timeout client {{ haproxy_client_timeout }}
   timeout server {{ haproxy_server_timeout }}
 {% endif %}
-{% if ansible_os_family == 'Debian' and haproxy_defaults.mode|default('') == 'http' %}
+{% if ansible_os_family == 'Debian' and 'mode http' in haproxy_defaults %}
   errorfile 400 /etc/haproxy/errors/400.http
   errorfile 403 /etc/haproxy/errors/403.http
   errorfile 408 /etc/haproxy/errors/408.http
@@ -48,28 +42,16 @@ frontend {{ haproxy_frontend_name }}
   bind {{ haproxy_frontend_bind_address }}:{{ haproxy_frontend_port }}
   mode {{ haproxy_frontend_mode }}
   default_backend {{ haproxy_backend_name }}
-{% for k, v in haproxy_frontend_options.items() | list %}
-{% if v is string %}
-  {{ k }} {{ v }}
-{% elif v is iterable %}
-{% for vl in v %}
-  {{ k }} {{ vl }}
+{% for haproxy_frontend_option in haproxy_frontend_options %}
+  {{ haproxy_frontend_option }}
 {% endfor %}
-{% endif %}{# end if v is string #}
-{% endfor %}{# end for k, v in haproxy_frontend_options.items() #}
 
 backend {{ haproxy_backend_name }}
   mode {{ haproxy_backend_mode }}
   balance {{ haproxy_backend_balance_method }}
-{% for k, v in haproxy_backend_options.items() | list %}
-{% if v is string %}
-  {{ k }} {{ v }}
-{% elif v is iterable %}
-{% for vl in v %}
-  {{ k }} {{ vl }}
+{% for haproxy_backend_option in haproxy_backend_options %}
+  {{ haproxy_backend_option }}
 {% endfor %}
-{% endif %}{# end if v is string #}
-{% endfor %}{# end for k, v in haproxy_backend_options.items() #}
 {% if haproxy_backend_httpchk != '' %}
   option httpchk {{ haproxy_backend_httpchk }}
 {% endif %}
