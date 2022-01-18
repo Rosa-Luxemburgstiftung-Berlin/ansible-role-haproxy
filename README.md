@@ -4,7 +4,7 @@
 
 Installs HAProxy on RedHat/CentOS and Debian/Ubuntu Linux servers.
 
-**Note**: This role _officially_ supports HAProxy versions 1.4 or 1.5. Future versions may require some rework.
+**Note**: This role _officially_ supports HAProxy versions 1.4 - 2.2. Future versions may require some rework.
 
 ## Requirements
 
