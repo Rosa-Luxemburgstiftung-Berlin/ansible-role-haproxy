@@ -61,11 +61,18 @@ frontend {{ haproxy_frontend_name }}
 backend {{ haproxy_backend_name }}
     mode {{ haproxy_backend_mode }}
     balance {{ haproxy_backend_balance_method }}
-    option forwardfor
+{% for k, v in haproxy_backend_options.items() | list %}
+{% if v is string %}
+  {{ k }} {{ v }}
+{% elif v is iterable %}
+{% for vl in v %}
+  {{ k }} {{ vl }}
+{% endfor %}
+{% endif %}{# end if v is string #}
+{% endfor %}{# end for k, v in haproxy_backend_options.items() #}
 {% if haproxy_backend_httpchk != '' %}
     option httpchk {{ haproxy_backend_httpchk }}
 {% endif %}
-    cookie SERVERID insert indirect
 {% for backend in haproxy_backend_servers %}
     server {{ backend.name }} {{ backend.address }} cookie {{ backend.name }} check
 {% endfor %}
