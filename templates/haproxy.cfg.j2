@@ -3,7 +3,7 @@ global
   log {{ logline }}
 {% endfor %}
 {% if haproxy_socket != '' %}
-  stats socket {{ haproxy_socket }} level admin
+  stats socket {{ haproxy_socket }} level {{ haproxy_socket_level }} {{ haproxy_socket_params }}
 {% endif %}
 {% if haproxy_chroot != '' %}
   chroot {{ haproxy_chroot }}

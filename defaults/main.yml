@@ -5,6 +5,8 @@ haproxy_log:
   - "/dev/log  local1 notice"
 
 haproxy_socket: /var/lib/haproxy/stats
+haproxy_socket_level: admin # use one of admin, operator or user
+haproxy_socket_params: ''
 haproxy_chroot: /var/lib/haproxy
 haproxy_user: haproxy
 haproxy_group: haproxy
