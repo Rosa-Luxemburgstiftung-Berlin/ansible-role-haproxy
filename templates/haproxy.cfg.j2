@@ -26,13 +26,13 @@ defaults
 {% endif %}{# end if v is string #}
 {% endfor %}{# end for k, v in haproxy_defaults.items() #}
 {% if haproxy_version is version('1.4', '<=') %}
-        contimeout {{ haproxy_connect_timeout }}
-        clitimeout {{ haproxy_client_timeout }}
-        srvtimeout {{ haproxy_server_timeout }}
+  contimeout {{ haproxy_connect_timeout }}
+  clitimeout {{ haproxy_client_timeout }}
+  srvtimeout {{ haproxy_server_timeout }}
 {% else %}
-        timeout connect {{ haproxy_connect_timeout }}
-        timeout client {{ haproxy_client_timeout }}
-        timeout server {{ haproxy_server_timeout }}
+  timeout connect {{ haproxy_connect_timeout }}
+  timeout client {{ haproxy_client_timeout }}
+  timeout server {{ haproxy_server_timeout }}
 {% endif %}
 {% if ansible_os_family == 'Debian' and haproxy_defaults.mode|default('') == 'http' %}
   errorfile 400 /etc/haproxy/errors/400.http
@@ -45,9 +45,9 @@ defaults
 {% endif %}
 
 frontend {{ haproxy_frontend_name }}
-    bind {{ haproxy_frontend_bind_address }}:{{ haproxy_frontend_port }}
-    mode {{ haproxy_frontend_mode }}
-    default_backend {{ haproxy_backend_name }}
+  bind {{ haproxy_frontend_bind_address }}:{{ haproxy_frontend_port }}
+  mode {{ haproxy_frontend_mode }}
+  default_backend {{ haproxy_backend_name }}
 {% for k, v in haproxy_frontend_options.items() | list %}
 {% if v is string %}
   {{ k }} {{ v }}
@@ -59,8 +59,8 @@ frontend {{ haproxy_frontend_name }}
 {% endfor %}{# end for k, v in haproxy_frontend_options.items() #}
 
 backend {{ haproxy_backend_name }}
-    mode {{ haproxy_backend_mode }}
-    balance {{ haproxy_backend_balance_method }}
+  mode {{ haproxy_backend_mode }}
+  balance {{ haproxy_backend_balance_method }}
 {% for k, v in haproxy_backend_options.items() | list %}
 {% if v is string %}
   {{ k }} {{ v }}
@@ -71,8 +71,8 @@ backend {{ haproxy_backend_name }}
 {% endif %}{# end if v is string #}
 {% endfor %}{# end for k, v in haproxy_backend_options.items() #}
 {% if haproxy_backend_httpchk != '' %}
-    option httpchk {{ haproxy_backend_httpchk }}
+  option httpchk {{ haproxy_backend_httpchk }}
 {% endif %}
 {% for backend in haproxy_backend_servers %}
-    server {{ backend.name }} {{ backend.address }} cookie {{ backend.name }} check
+  server {{ backend.name }} {{ backend.address }} cookie {{ backend.name }} check
 {% endfor %}
