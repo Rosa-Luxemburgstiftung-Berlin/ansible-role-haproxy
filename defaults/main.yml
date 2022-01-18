@@ -44,6 +44,7 @@ haproxy_backend_servers: []
 #   address: 192.168.0.1:80
 # - name: app2
 #   address: 192.168.0.2:80
+#   params: maxconn 32 check
 
 # default
 haproxy_defaults:
