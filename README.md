@@ -33,7 +33,7 @@ The user and group under which HAProxy should run. Only change this if you know 
     haproxy_frontend_bind_address: '*'
     haproxy_frontend_port: 80
     haproxy_frontend_mode: 'http'
-    haproxy_frontend_options: {}
+    haproxy_frontend_options: []
 
 HAProxy frontend configuration directives.
 
@@ -42,9 +42,8 @@ HAProxy frontend configuration directives.
     haproxy_backend_balance_method: 'roundrobin'
     haproxy_backend_httpchk: 'HEAD / HTTP/1.1\r\nHost:localhost'
     haproxy_backend_options:
-      cookie: SERVERID insert indirect
-      option:
-        - forwardfor
+      - cookie SERVERID insert indirect
+      - option forwardfor
 
 HAProxy backend configuration directives.
 
@@ -59,11 +58,10 @@ HAProxy backend configuration directives.
 A list of backend servers (name and address) to which HAProxy will distribute requests.
 
     haproxy_defaults:
-      log: global
-      mode:  http
-      option:
-        - httplog
-        - dontlognull
+      - log global
+      - mode http
+      - option httplog
+      - option dontlognull
 
 HAProxy default settings.
 
