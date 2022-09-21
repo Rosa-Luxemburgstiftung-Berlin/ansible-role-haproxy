@@ -102,5 +102,5 @@ MIT / BSD
 
 This role was created in 2015 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
 
-Sept 2022 : [![@zerwes](https://avatars.githubusercontent.com/u/9654986?s=48&v=4)](https://github.com/zerwes) for [![RLS](https://avatars.githubusercontent.com/u/35101423?s=70&v=4)](https://github.com/Rosa-Luxemburgstiftung-Berlin) started the current default `main` branch in this repository intended as a detached fork of the original repository due to inactivity and stagnation on the original repo. (see https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/pull/7)
+Sept 2022 : [![@zerwes](https://avatars.githubusercontent.com/u/9654986?s=48&v=4)](https://github.com/zerwes) for [![RLS](https://avatars.githubusercontent.com/u/35101423?s=48&v=4)](https://github.com/Rosa-Luxemburgstiftung-Berlin) started the current default `main` branch in this repository intended as a detached fork of the original repository due to inactivity and stagnation on the original repo. (see https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/pull/7)
 
