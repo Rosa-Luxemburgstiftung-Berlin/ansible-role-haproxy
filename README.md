@@ -4,6 +4,8 @@
 
 Installs HAProxy on RedHat/CentOS and Debian/Ubuntu Linux servers.
 
+**Note**: This is a detached fork of the (original role from geerlingguy/ansible-role-haproxy](https://github.com/geerlingguy/ansible-role-haproxy) including new features but still retaining backward compatibility. New features will not be issued as PRs to the original (see https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/pull/7).
+
 **Note**: This role _officially_ supports HAProxy versions 1.4 - 2.2. Future versions may require some rework.
 
 ## Requirements
@@ -102,5 +104,7 @@ MIT / BSD
 
 This role was created in 2015 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
 
-Sept 2022 : [![@zerwes](https://avatars.githubusercontent.com/u/9654986?s=32&v=4)](https://github.com/zerwes) for [![RLS](https://avatars.githubusercontent.com/u/35101423?s=32&v=4)](https://github.com/Rosa-Luxemburgstiftung-Berlin) started the current default `main` branch in this repository intended as a detached fork of the original repository due to inactivity and stagnation on the original repo. (see https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/pull/7)
+Sept 2022 [![@zerwes](https://avatars.githubusercontent.com/u/9654986?s=32&v=4)](https://github.com/zerwes)
+for [![RLS](https://avatars.githubusercontent.com/u/35101423?s=32&v=4)](https://github.com/Rosa-Luxemburgstiftung-Berlin) :
+started the current default `main` branch in this repository intended as a detached fork of the original repository due to inactivity and stagnation on the original repo. (see https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/pull/7)
 
