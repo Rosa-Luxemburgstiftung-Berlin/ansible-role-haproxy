@@ -1,10 +1,12 @@
 # Ansible Role: HAProxy
 
+:exclamation: This is a detached fork of the [original role from geerlingguy/ansible-role-haproxy](https://github.com/geerlingguy/ansible-role-haproxy) including new features but still retaining backward compatibility. New features will not be issued as PRs to the original (see https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/pull/7). :exclamation:
+
+---
+
 [![CI](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/ci.yml/badge.svg)](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/ci.yml)
 
 Installs HAProxy on RedHat/CentOS and Debian/Ubuntu Linux servers.
-
-**Note**: This is a detached fork of the (original role from geerlingguy/ansible-role-haproxy](https://github.com/geerlingguy/ansible-role-haproxy) including new features but still retaining backward compatibility. New features will not be issued as PRs to the original (see https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/pull/7).
 
 **Note**: This role _officially_ supports HAProxy versions 1.4 - 2.2. Future versions may require some rework.
 
