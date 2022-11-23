@@ -53,9 +53,10 @@ frontend {{ haproxy_frontend_name }}
 
 {% for frontend in haproxy_frontends %}
 frontend {{ frontend.name }}
-  bind {{ frontend.bind_address | default(haproxy_frontend_defaults.bind_address) }}:{{ frontend.port | default(haproxy_frontend_defaults.port) }}
+  bind {{ frontend.bind_address | default(haproxy_frontend_defaults.bind_address) }}:{{ frontend.port | default(haproxy_frontend_defaults.port) }}{%if frontend.bind_args is defined %} {{ frontend.bind_args }}{% endif %}
+
   {% for k, v in (haproxy_frontend_defaults | combine(frontend, recursive=true)).items() | list %}
-  {% if k not in ['name', 'bind_address', 'port',] %}
+  {% if k not in ['name', 'bind_address', 'port', 'bind_args', ] %}
   {% if v is string %}
   {{ k }} {{ v }}
   {% elif v is iterable %}

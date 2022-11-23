@@ -52,6 +52,7 @@ haproxy_frontends: []
 #     bind_address: '*'
 #   - name: httpslb
 #     port: 443
+#     bind_args: additional args to be appended to the bind line after {{ bind_address }}:{{ port }}
 #     default_backend: habackend
 #     description: front of front
 #     option:
