@@ -52,11 +52,14 @@ haproxy_frontends: []
 #     bind_address: '*'
 #   - name: httpslb
 #     port: 443
-#     bind_args: additional args to be appended to the bind line after {{ bind_address }}:{{ port }}
+#     #bind_args: additional args to be appended to the bind line after {{ bind_address }}:{{ port }}
+#     bind_args: "ssl crt {{ ansible_fqdn }}.pem"
 #     default_backend: habackend
 #     description: front of front
-#     option:
+#     option: # list of options
+#       - forwardfor
 #       - tcplog
+#       - ...
 #     ...
 
 # Backend settings. Deprecated! Use haproxy_backend service list
