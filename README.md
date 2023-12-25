@@ -98,6 +98,10 @@ None.
       roles:
         - { role: geerlingguy.haproxy }
 
+## Caveats
+
+`check_mode` will not work until haproxy is installed!
+
 ## License
 
 MIT / BSD
