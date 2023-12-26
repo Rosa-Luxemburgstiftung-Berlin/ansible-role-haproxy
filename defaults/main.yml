@@ -115,3 +115,6 @@ haproxy_defaults:
 haproxy_connect_timeout: 5000
 haproxy_client_timeout: 50000
 haproxy_server_timeout: 50000
+
+# validate cfg in silent mode?
+haproxy_validate_silent: true
