@@ -1,6 +1,8 @@
 ---
 - name: Ensure HAProxy is installed.
-  ansible.builtin.package: name=haproxy state=present
+  ansible.builtin.package:
+    name: haproxy
+    state: present
 
 - name: Ensure HAProxy is enabled (so init script will start it on Debian).
   ansible.builtin.lineinfile:
@@ -53,4 +55,7 @@
   notify: restart haproxy
 
 - name: Ensure HAProxy is started and enabled on boot.
-  ansible.builtin.service: name=haproxy state=started enabled=yes
+  ansible.builtin.service:
+    name: haproxy
+    state: started
+    enabled: true
