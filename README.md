@@ -1,12 +1,15 @@
 # Ansible Role: HAProxy
 
-:exclamation: This is a detached fork of the [original role from geerlingguy/ansible-role-haproxy](https://github.com/geerlingguy/ansible-role-haproxy) including new features but still retaining backward compatibility. New features will not be issued as PRs to the original (see https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/pull/7). :exclamation:
-
 ---
 
 [![ansible-lint](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/lint.yml/badge.svg)](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/lint.yml)
 [![molecule test](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/molecule.yml/badge.svg)](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/molecule.yml)
 
+---
+
+:exclamation: This is a detached fork of the [original role from geerlingguy/ansible-role-haproxy](https://github.com/geerlingguy/ansible-role-haproxy) including new features but still retaining backward compatibility. New features will not be issued as PRs to the original (see https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/pull/7). :exclamation:
+
+---
 
 Installs HAProxy on RedHat/CentOS and Debian/Ubuntu Linux servers.
 
