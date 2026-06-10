@@ -1,5 +1,5 @@
 ---
-- name: restart haproxy
+- name: restart haproxy  # noqa name[casing]
   ansible.builtin.service:
     name: haproxy
     state: restarted
