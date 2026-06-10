@@ -4,7 +4,9 @@
 
 ---
 
-[![CI](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/ci.yml/badge.svg)](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/ci.yml)
+[![ansible-lint](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/lint.yml/badge.svg)](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/lint.yml)
+[![molecule test](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/molecule.yml/badge.svg)](https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-haproxy/actions/workflows/molecule.yml)
+
 
 Installs HAProxy on RedHat/CentOS and Debian/Ubuntu Linux servers.
 
