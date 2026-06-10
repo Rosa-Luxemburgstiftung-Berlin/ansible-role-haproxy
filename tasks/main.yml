@@ -26,7 +26,7 @@
   ansible.builtin.debug:
     var: haproxy_version
 
-- name: check deprecated vars
+- name: Check deprecated vars
   ansible.builtin.fail:
     msg: "detected deprecated var {{ item }}"
   ignore_errors: "{{ warn_on_old_haproxy_vars }}"
