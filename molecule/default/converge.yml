@@ -4,15 +4,39 @@
   become: true
 
   vars:
-    haproxy_socket: ''
-    haproxy_chroot: ''
-    haproxy_user: root
-    haproxy_group: root
-
-    haproxy_backend_servers:
-      - name: app1
-        address: 127.0.0.1:8080
-
+    ignore_old_haproxy_vars: true
+    deprecate_old_haproxy_vars: true
+    haproxy_socket_level: admin
+    haproxy_socket_params: mode 660 expose-fd listeners
+    haproxy_global_vars:
+      - stats timeout 30s
+    haproxy_defaults:
+      - log global
+      - mode http
+      - option dontlognull
+      - option httplog
+    haproxy_connect_timeout: '5000'
+    haproxy_client_timeout: '50000'
+    haproxy_server_timeout: '50000'
+    haproxy_backends:
+      - name: backend
+        mode: http
+        option:
+          - forwardfor
+        servers:
+          - name: localhost
+            address: "127.0.0.1:8080"
+    haproxy_frontend_defaults:
+      bind_address: "{{ ansible_default_ipv4.address }}"
+      mode: http
+      option:
+        - httplog
+        - forwardfor
+    haproxy_frontends:
+      - name: front
+        port: 8888
+        use_backend:
+          - backend
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
