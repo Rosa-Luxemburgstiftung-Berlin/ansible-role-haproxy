@@ -1,0 +1,86 @@
+---
+name: molecule test
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "15 5 * * 1"
+
+defaults:
+  run:
+    working-directory: ansible-role-hiyapyco
+
+jobs:
+  molecule:
+    name: ansible
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ansible:
+          #- latest
+          - 13
+          - 12
+          - 11
+          - 2.9
+        distro:
+          - debian13
+          - debian12
+        include:
+          #- ansible: latest
+          #  pip3deps: '"ansible>=14" "ansible-core>=2.21" molecule "molecule-plugins[docker]" yamllint ansible-lint requests==2.31.0'
+          #  pythonversion: 3.13.5
+          - ansible: 13
+            pip3deps: '"ansible>=13,<14" "ansible-core>=2.20,<2.21" molecule "molecule-plugins[docker]" yamllint ansible-lint requests==2.31.0'
+            pythonversion: 3.13.5
+          - ansible: 12
+            pip3deps: '"ansible>=12,<13" "ansible-core>=2.19,<2.20" molecule "molecule-plugins[docker]" yamllint ansible-lint requests==2.31.0'
+            pythonversion: 3.13.5
+          - ansible: 11
+            pip3deps: '"ansible==11.13.0" "ansible-core==2.18.15" "molecule-plugins[docker]" "yamllint==1.38.0" "ansible-lint==26.4.0"'
+            pythonversion: 3.13.5
+          - ansible: 2.9
+            pip3deps: '"ansible==2.9.27" "molecule[docker,lint]==3.2.3" "yamllint==1.24.2" "ansible-lint==4.2.0" "requests<2.29" "urllib3<2"'
+            pythonversion: 3.9
+        exclude:
+          - distro: debian13
+            ansible: 2.9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: 'ansible-role-haproxy'
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.pythonversion }}
+
+      - name: Install test dependencies.
+        run: pip3 install ${{ matrix.pip3deps }}
+
+      - name: Install collections required on ansible 2.9
+        run: ansible-galaxy collection install community.general
+        if: ${{ matrix.ansible == 'legacy' }}
+
+      - name: debug
+        run: |
+          ansible --version
+          echo "--------------------"
+          python --version
+          echo "--------------------"
+          pip list
+          echo "--------------------"
+          pwd
+          echo "--------------------"
+          ls -1
+          echo "--------------------"
+          ls -l
+          echo "--------------------"
+
+      - name: run molecule tests
+        run: molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          ANSIBLE_ROLES_PATH: '../../../'
+          MOLECULE_DISTRO: ${{ matrix.distro }}
