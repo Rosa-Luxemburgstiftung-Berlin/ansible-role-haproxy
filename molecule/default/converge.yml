@@ -17,6 +17,7 @@
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
       when: ansible_os_family == 'Debian'
-
-  roles:
-    - role: ansible-role-haproxy
+  tasks:
+    - name: "Include role"
+      include_role:
+        name: "{{ lookup('env', 'MOLECULE_ROLE_NAME') | default('ansible-role-haproxy', true) }}"
