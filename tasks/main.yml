@@ -46,6 +46,25 @@
     - haproxy_backend_options
     - haproxy_backend_servers
 
+- name: Scripts for external-check
+  block:
+    - name: Ensure {{ haproxy_externalcheck_scripts_dir }} exists
+      ansible.builtin.file:
+        path: "{{ haproxy_externalcheck_scripts_dir }}"
+        state: directory
+        owner: root
+        group: "{{ haproxy_group }}"
+        mode: '0750'
+    - name: Copy external-check scripts
+      ansible.builtin.template:
+        src: "{{ item }}.j2"
+        dest: "{{ (haproxy_externalcheck_scripts_dir, item) | path_join  }}"
+        owner: root
+        group: "{{ haproxy_group }}"
+        mode: '0750'
+      with_items: "{{ haproxy_externalcheck_scripts }}"
+  when: haproxy_externalcheck_scripts | length > 0
+
 - name: Copy HAProxy configuration in place.
   ansible.builtin.template:
     src: haproxy.cfg.j2

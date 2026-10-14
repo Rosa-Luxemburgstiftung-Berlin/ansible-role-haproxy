@@ -118,3 +118,15 @@ haproxy_server_timeout: 50000
 
 # validate cfg in silent mode?
 haproxy_validate_silent: true
+
+# templated external-check scripts to install
+# list the file name without the .j2 extension here
+# example:
+# haproxy_externalcheck_scripts:
+#   - myfancycheck.sh
+# will install the script myfancycheck.sh in haproxy_externalcheck_scripts_dir
+# and will seek for a template named myfancycheck.sh.j2
+haproxy_externalcheck_scripts: []
+
+# dir to install scripts to
+haproxy_externalcheck_scripts_dir: /etc/haproxy/scripts
