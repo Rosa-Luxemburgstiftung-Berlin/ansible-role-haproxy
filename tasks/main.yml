@@ -46,9 +46,9 @@
     - haproxy_backend_options
     - haproxy_backend_servers
 
-- name: Scripts for external-check
+- name: Scripts for external-check  # noqa key-order
   block:
-    - name: Ensure {{ haproxy_externalcheck_scripts_dir }} exists
+    - name: Ensure {{ haproxy_externalcheck_scripts_dir }} exists  # noqa name[template]
       ansible.builtin.file:
         path: "{{ haproxy_externalcheck_scripts_dir }}"
         state: directory
@@ -58,7 +58,7 @@
     - name: Copy external-check scripts
       ansible.builtin.template:
         src: "{{ item }}.j2"
-        dest: "{{ (haproxy_externalcheck_scripts_dir, item) | path_join  }}"
+        dest: "{{ (haproxy_externalcheck_scripts_dir, item) | path_join }}"
         owner: root
         group: "{{ haproxy_group }}"
         mode: '0750'
