@@ -126,6 +126,7 @@ haproxy_validate_silent: true
 #   - myfancycheck.sh
 # will install the script myfancycheck.sh in haproxy_externalcheck_scripts_dir
 # and will seek for a template named myfancycheck.sh.j2
+# keep in mind: this may not work with chroot enabled
 haproxy_externalcheck_scripts: []
 
 # dir to install scripts to
